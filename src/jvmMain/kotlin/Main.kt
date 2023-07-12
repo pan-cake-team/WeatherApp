@@ -9,7 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import data.WeatherServiceImp
+import ui.theme.TextPrimary
+import ui.theme.textSize80
+import ui.theme.typography
 
 
 @Composable
@@ -21,7 +23,7 @@ fun App() {
         Button(onClick = {
             text = "Hello, Desktop!"
         }) {
-            Text(text)
+            Text(text, style = typography.h1, color = TextPrimary, fontSize = textSize80)
         }
     }
 }
