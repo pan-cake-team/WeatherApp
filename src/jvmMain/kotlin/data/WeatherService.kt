@@ -1,5 +1,8 @@
 package data
 
-interface WeatherService {
+import data.dto.Response
 
+interface WeatherService {
+    suspend fun getDailyWeather(): Response
+    suspend fun getHourWeather(): Response
 }

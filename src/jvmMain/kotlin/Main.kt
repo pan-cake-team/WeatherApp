@@ -9,6 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import data.WeatherServiceImp
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import kotlinx.coroutines.runBlocking
 import ui.theme.TextPrimary
 import ui.theme.textSize80
 import ui.theme.typography
@@ -29,8 +35,14 @@ fun App() {
 }
 
 
-fun main()= application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+fun main() {
+    runBlocking {
+        val weatherService = WeatherServiceImp.create()
+        val dailyWeather = weatherService.getDailyWeather()
+        val hourlyWeather = weatherService.getHourWeather()
+
+
+        println(dailyWeather)
+        println(hourlyWeather)
     }
 }
