@@ -1,10 +1,11 @@
 package data.repo
 
 import data.remote.WeatherService
+import data.remote.dto.Location
 import data.remote.dto.WeatherResponse
 
 class WeatherRepoImpl(
-    weatherService: WeatherService,
+    private val weatherService: WeatherService,
 ) : WeatherRepo{
 
     override suspend fun getDailyWeather(): List<WeatherResponse> {
@@ -15,4 +16,7 @@ class WeatherRepoImpl(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getCurrentLocation(): Location {
+        return weatherService.getLocation()
+    }
 }
