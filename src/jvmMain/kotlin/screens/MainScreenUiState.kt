@@ -1,11 +1,11 @@
 package screens
 
-data class MainScreenUiState(
-    val todayTemp: Int,
-    val windSpeed: Int,
-    val precipitation: Int,
-    val todayIntervals: List<DayHourIntervals>,
-    val daysIntervals: List<DaysInterval>
+data class HourlyUiState(
+    val values: List<DayHourIntervals>
+)
+
+data class DailyUiState(
+    val days: List<DaysInterval>
 )
 
 data class DayHourIntervals(
