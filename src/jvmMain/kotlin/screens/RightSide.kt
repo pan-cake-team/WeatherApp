@@ -16,13 +16,15 @@ import ui.theme.*
 
 @Composable
 fun RightSide() {
-    Box(Modifier.width(Space360).fillMaxHeight().background(color = Cards)) {
+    Box(Modifier.fillMaxHeight().background(color = Cards)) {
 
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = Space32),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LocationCard(country = "Iraq", state = "Baghdad")
+            Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)){
+                LocationCard(country = "Iraq", state = "Baghdad")
+            }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("11°", style = typography.h1, color = TextPrimary)
                 Text(
@@ -66,11 +68,10 @@ fun RightSide() {
                 }
             }
 
-            Spacer(Modifier.fillMaxWidth().height(Space1).background(Divider))
+            Spacer(Modifier.padding(horizontal = Space32).fillMaxWidth().height(Space1).background(Divider))
             Column(
                 Modifier.fillMaxHeight()
-                    .background(color = Cards)
-                    .padding(start = Space32, end = Space32, top = Space40),
+                    .padding( top = Space40),
                 verticalArrangement = Arrangement.spacedBy(space = Space24),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -78,7 +79,7 @@ fun RightSide() {
                 LazyColumn(
                     contentPadding = PaddingValues(Space8),
                     verticalArrangement = Arrangement.spacedBy(Space16),
-                    modifier = Modifier.padding(horizontal = Space32)
+                    modifier = Modifier
                 ) {
                     items(count = 40) {
                         NextDayForCastItem()

@@ -26,6 +26,7 @@ import ui.theme.Radius8
 import ui.theme.Space1
 import ui.theme.Space12
 import ui.theme.Space16
+import ui.theme.Space32
 import ui.theme.Space48
 import ui.theme.Space8
 import ui.theme.TextPrimary
@@ -34,13 +35,12 @@ import ui.theme.typography
 
 @Composable
 fun LocationCard(country: String, state: String) {
-    Row (
+    Row(
         Modifier
             .clip(RoundedCornerShape(Radius8))
             .border(
                 width = Space1, color = Icons, RoundedCornerShape(Radius8),
             )
-            .background(Color.Black)
             .fillMaxWidth()
             .height(Space48)
     ) {
@@ -53,7 +53,7 @@ fun LocationCard(country: String, state: String) {
                 modifier = Modifier.padding(start = Space8)
             )
             Spacer(Modifier.weight(1f))
-           HorizontalDivider()
+            HorizontalDivider()
 
             Icon(
                 painter = painterResource(IconMap),

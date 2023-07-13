@@ -67,7 +67,7 @@ fun NextDayForCastItem() {
             }
             HorizontalDivider()
 
-            Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.padding(start = Space16)) {
+            Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier) {
                 Text("11°", style = typography.h5, color = TextPrimary)
                 Text("3°", style = typography.h6, color = TextSecondary)
             }
