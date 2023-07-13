@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import data.remote.WeatherServiceImp
+import data.remote.initKoin
 import di.weatherModule
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.GlobalContext.startKoin
@@ -20,9 +21,8 @@ import ui.theme.typography
 @Preview
 fun App() {
     var text by remember { mutableStateOf("Hello, World!") }
-    startKoin {
-        modules(weatherModule)
-    }
+    val koin = initKoin()
+
 
     MaterialTheme {
         Button(onClick = {
