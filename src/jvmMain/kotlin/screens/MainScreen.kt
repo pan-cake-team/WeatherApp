@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import screens.composable.DateCard
 import screens.composable.HorizontalLine
 import screens.composable.SpacerVertical
 import screens.composable.WeatherTimeCard
@@ -25,7 +26,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun MainContent(){
+fun MainContent() {
 
     Box(
         contentAlignment = Alignment.BottomEnd,
@@ -38,26 +39,38 @@ fun MainContent(){
             contentDescription = "",
         )
 
+
+
         Row(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.Bottom)
-                    .padding(40.dp),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.End,
-            ) {
 
-                Text("Mist", style = typography.h1, color = TextSecondary)
-                HorizontalLine()
-                SpacerVertical(32)
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(start = 16.dp),
+            Box(
+                modifier = Modifier.padding(40.dp).fillMaxHeight(),
+            ) {
+                DateCard(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+
+                )
+
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd),
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.End,
                 ) {
-                    items(8) {
-                        WeatherTimeCard(time = "11:00", number = 12,)
+
+                    Text("Mist", style = typography.h1, color = TextSecondary)
+                    HorizontalLine()
+                    SpacerVertical(32)
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        contentPadding = PaddingValues(start = 16.dp),
+                    ) {
+                        items(8) {
+                            WeatherTimeCard(time = "11:00", number = 12)
+                        }
                     }
                 }
             }
