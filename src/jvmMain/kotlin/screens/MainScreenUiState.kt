@@ -1,12 +1,16 @@
 package screens
 
+// this is just bad I don't like it :(
+
 data class HourlyUiState(
-    val lat: Double = 0.0,
-    val long: Double = 0.0,
+    val isLoading: Boolean = true,
+    val isError: Boolean = false,
     val values: List<DayHourIntervals> = emptyList()
 )
 
 data class DailyUiState(
+    val isLoading: Boolean = true,
+    val isError: Boolean = false,
     val todayTemp: Int = 0,
     val todayMinTemp: Int = 0,
     val windSpeed: Double = 0.0,

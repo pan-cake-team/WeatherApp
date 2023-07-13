@@ -56,7 +56,6 @@ class WeatherViewModel(
             val currentLocation = getCurrentLocation()
             val (lat,long) = currentLocation
             _dailyUiState.update { it.copy(lat = lat, long = long) }
-            _hourlyUiState.update { it.copy(lat = lat, long = long) }
             viewModuleScope.cancel()
         }
     }
