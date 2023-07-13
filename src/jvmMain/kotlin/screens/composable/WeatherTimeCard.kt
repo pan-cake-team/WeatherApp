@@ -42,7 +42,7 @@ fun WeatherTimeCard(
             IconSquare()
             SpacerVertical(8)
             Text(
-                text = "$number c",
+                text = "$number °c",
                 style = typography.h4,
                 color = TextPrimary,
             )
