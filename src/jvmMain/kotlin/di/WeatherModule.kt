@@ -8,12 +8,17 @@ import domain.GetCurrentLocationUseCase
 import domain.GetDailyWeatherUseCase
 import domain.GetHourlyWeatherUseCase
 import org.koin.dsl.module
+import screens.WeatherViewModel
 
 
 val weatherModule = module {
+
     single<WeatherService> { WeatherServiceImp(get()) }
     single<WeatherRepository> { WeatherRepositoryImp(get()) }
     single { GetDailyWeatherUseCase(get()) }
     single { GetHourlyWeatherUseCase(get()) }
     single { GetCurrentLocationUseCase(get()) }
+//    single { GetCityLocationUseCase(get()) }
+    single { WeatherViewModel( get(), get(), get()) }
+
 }
