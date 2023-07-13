@@ -37,10 +37,13 @@ fun MainContent(){
             painter = painterResource("images/foggy.png"),
             contentDescription = "",
         )
-        Row {
-            RightSide()
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Column(
                 modifier = Modifier
+                    .align(Alignment.Bottom)
                     .padding(40.dp),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.End,
@@ -51,13 +54,16 @@ fun MainContent(){
                 SpacerVertical(32)
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(start = 16.dp, ),
+                    contentPadding = PaddingValues(start = 16.dp),
                 ) {
-                    items(5) {
+                    items(8) {
                         WeatherTimeCard(time = "11:00", number = 12,)
                     }
                 }
             }
+
+            RightSide()
+
         }
     }
 }
