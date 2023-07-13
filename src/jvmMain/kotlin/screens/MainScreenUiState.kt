@@ -5,6 +5,10 @@ data class HourlyUiState(
 )
 
 data class DailyUiState(
+    val todayTemp: Int,
+    val todayMinTemp: Int,
+    val windSpeed: Double,
+    val precipitation: Int,
     val days: List<DaysInterval>
 )
 
