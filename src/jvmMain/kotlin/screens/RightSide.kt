@@ -47,12 +47,6 @@ import ui.theme.typography
 @Composable
 fun RightSide() {
     Box(Modifier.fillMaxHeight().background(color = Cards)) {
-        Image(
-            painter = painterResource(ImageThunder),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
 
         Column(
             modifier = Modifier.fillMaxSize().padding(horizontal = Space32),
@@ -89,7 +83,6 @@ fun RightSide() {
                         color = TextPrimary
                     )
                 }
-
             }
             Box(Modifier.padding(top = Space8, bottom = Space40)) {
                 Row(Modifier.padding(Space8)) {
@@ -123,10 +116,7 @@ fun RightSide() {
                 }
             }
         }
-
     }
-
-
 }
 
 @Preview
