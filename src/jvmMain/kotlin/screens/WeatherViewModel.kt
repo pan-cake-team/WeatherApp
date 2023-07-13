@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(
-    private val getDailyWeather: GetDailyWeatherUseCase,
     private val getCurrentLocation: GetCurrentLocationUseCase,
     private val getHourlyWeather: GetHourlyWeatherUseCase,
     private val getCityLocation: GetCityLocationUseCase,
+
 ) {
 
     private val _weatherUiState = MutableStateFlow(WeatherUiState())
@@ -33,4 +33,5 @@ class WeatherViewModel(
             viewModuleScope.cancel()
         }
     }
+
 }
