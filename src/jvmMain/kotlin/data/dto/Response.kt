@@ -5,50 +5,50 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Response(
+data class WeatherResponse(
     @SerialName("data")
     val `data`: Data
-) {
-    @Serializable
-    data class Data(
-        @SerialName("timelines")
-        val timelines: List<Timeline>
-    ) {
-        @Serializable
-        data class Timeline(
-            @SerialName("endTime")
-            val endTime: String,
-            @SerialName("intervals")
-            val intervals: List<Interval>,
-            @SerialName("startTime")
-            val startTime: String,
-            @SerialName("timestep")
-            val timestep: String
-        ) {
-            @Serializable
-            data class Interval(
-                @SerialName("startTime")
-                val startTime: String,
-                @SerialName("values")
-                val values: Values
-            ) {
-                @Serializable
-                data class Values(
-                    @SerialName("precipitationType")
-                    val precipitationType: Int,
-                    @SerialName("temperature")
-                    val temperature: Double,
-                    @SerialName("temperatureMin")
-                    val temperatureMin: Double,
-                    @SerialName("weatherCode")
-                    val weatherCode: Int,
-                    @SerialName("windSpeed")
-                    val windSpeed: Double
-                )
-            }
-        }
-    }
-}
+)
+
+@Serializable
+data class Data(
+    @SerialName("timelines")
+    val timelines: List<Timeline>
+)
+
+@Serializable
+data class Timeline(
+    @SerialName("endTime")
+    val endTime: String,
+    @SerialName("intervals")
+    val intervals: List<Interval>,
+    @SerialName("startTime")
+    val startTime: String,
+    @SerialName("timestep")
+    val timestep: String
+)
+
+@Serializable
+data class Interval(
+    @SerialName("startTime")
+    val startTime: String,
+    @SerialName("values")
+    val values: Values
+)
+
+@Serializable
+data class Values(
+    @SerialName("windGust")
+    val windGust: Double,
+    @SerialName("temperature")
+    val temperature: Double,
+    @SerialName("temperatureMin")
+    val temperatureMin: Double,
+    @SerialName("weatherCode")
+    val weatherCode: Int,
+    @SerialName("windSpeed")
+    val windSpeed: Double
+)
 
 fun getWeatherMeaning(weatherCode: Int): String {
     return when (weatherCode) {
