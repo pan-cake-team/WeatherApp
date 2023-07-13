@@ -1,6 +1,5 @@
 package screens
 
-import domain.GetWeatherUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(
-    private val getWeatherUseCase: GetWeatherUseCase,
+
 ) {
 
     private val _weatherUiState = MutableStateFlow(WeatherUiState())
@@ -23,7 +22,6 @@ class WeatherViewModel(
 
     private fun getWeatherData() {
         viewModuleScope.launch {
-            getWeatherUseCase.GetWeatherData()
             viewModuleScope.cancel()
         }
     }
