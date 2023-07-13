@@ -1,6 +1,6 @@
-package data
+package data.remote
 
-import data.dto.WeatherResponse
+import data.remote.dto.WeatherResponse
 
 interface WeatherService {
     suspend fun getDailyWeather(): WeatherResponse

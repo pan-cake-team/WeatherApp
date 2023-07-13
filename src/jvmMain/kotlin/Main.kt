@@ -7,14 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
-import data.WeatherServiceImp
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
+import data.remote.WeatherServiceImp
+import di.weatherModule
 import kotlinx.coroutines.runBlocking
+import org.koin.core.context.GlobalContext.startKoin
 import ui.theme.TextPrimary
 import ui.theme.textSize80
 import ui.theme.typography
@@ -24,6 +20,9 @@ import ui.theme.typography
 @Preview
 fun App() {
     var text by remember { mutableStateOf("Hello, World!") }
+    startKoin {
+        modules(weatherModule)
+    }
 
     MaterialTheme {
         Button(onClick = {

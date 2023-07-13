@@ -1,6 +1,6 @@
-package data
+package data.remote
 
-import data.dto.WeatherResponse
+import data.remote.dto.WeatherResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -17,7 +17,7 @@ class WeatherServiceImp(
 
 
     companion object{
-        fun create(): WeatherService{
+        fun create(): WeatherService {
             return WeatherServiceImp(
                 client = HttpClient(CIO){
                     install(ContentNegotiation) {
