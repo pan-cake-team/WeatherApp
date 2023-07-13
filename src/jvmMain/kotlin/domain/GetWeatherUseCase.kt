@@ -3,9 +3,9 @@ package domain
 import data.remote.dto.WeatherResponse
 
 class GetWeatherUseCase {
-fun GetWeatherData(){
+    fun GetWeatherData() {
 
-}
+    }
 }
 
-private fun WeatherResponse.toWeatherModel(){}
+private fun WeatherResponse.toWeatherModel() {}
