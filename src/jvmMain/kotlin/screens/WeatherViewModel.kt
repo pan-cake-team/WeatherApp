@@ -1,6 +1,5 @@
 package screens
 
-import domain.GetCityLocationUseCase
 import domain.GetCurrentLocationUseCase
 import domain.GetDailyWeatherUseCase
 import domain.GetHourlyWeatherUseCase
@@ -14,12 +13,15 @@ import kotlinx.coroutines.launch
 class WeatherViewModel(
     private val getCurrentLocation: GetCurrentLocationUseCase,
     private val getHourlyWeather: GetHourlyWeatherUseCase,
-    private val getCityLocation: GetCityLocationUseCase,
+    private val getDailyWeatherUseCase: GetDailyWeatherUseCase,
+//    private val getCityLocation: GetCityLocationUseCase,
+    ) {
 
-) {
+    private val _dailyUiState = MutableStateFlow(DailyUiState())
+    val dailyUiState = _dailyUiState.asStateFlow()
 
-    private val _weatherUiState = MutableStateFlow(WeatherUiState())
-    val weatherUiState = _weatherUiState.asStateFlow()
+    private val _hourlyUiState = MutableStateFlow(HourlyUiState())
+    val hourlyUiState = _hourlyUiState.asStateFlow()
 
     private val viewModuleScope = CoroutineScope(Dispatchers.IO)
 
@@ -29,9 +31,17 @@ class WeatherViewModel(
 
     private fun getDailyWeatherData() {
         viewModuleScope.launch {
-//            getDailyWeather.GetDailyWeatherData()
+            // use ui state
+            getDailyWeatherUseCase(22.9 ,11.2)
             viewModuleScope.cancel()
         }
     }
 
+    private fun getCurrentLocation() {
+        viewModuleScope.launch {
+            val currentLocation = getCurrentLocation()
+            // update ui state daily and hourly
+            viewModuleScope.cancel()
+        }
+    }
 }

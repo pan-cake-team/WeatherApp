@@ -1,4 +1,4 @@
-package data.domain.entity
+package domain.model
 
 data class HourlyWeather(
     val date: String,

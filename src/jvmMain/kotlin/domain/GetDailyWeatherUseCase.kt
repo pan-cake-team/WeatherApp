@@ -1,6 +1,7 @@
 package domain
 
 import data.domain.entity.DailyWeather
+import domain.model.DailyWeather
 import data.repository.WeatherRepository
 import screens.DailyUiState
 import screens.DaysInterval
