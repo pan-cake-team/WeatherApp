@@ -1,9 +1,6 @@
 package domain
 
 import data.domain.entity.DailyWeather
-import data.remote.WeatherService
-import data.remote.dto.IntervalDTO
-import data.remote.dto.Location
 import data.repository.WeatherRepository
 import screens.DailyUiState
 import screens.DaysInterval
