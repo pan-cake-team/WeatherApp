@@ -1,7 +1,7 @@
 package data.remote.response.mapper
 
-import data.domain.entity.DailyWeather
-import data.domain.entity.HourlyWeather
+import domain.model.DailyWeather
+import domain.model.HourlyWeather
 import data.remote.dto.IntervalDTO
 
 fun List<IntervalDTO>.toDailyWeather(): List<DailyWeather> {

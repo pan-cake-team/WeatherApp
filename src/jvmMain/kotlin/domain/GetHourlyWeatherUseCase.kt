@@ -1,6 +1,6 @@
 package domain
 
-import data.domain.entity.HourlyWeather
+import domain.model.HourlyWeather
 import data.repository.WeatherRepository
 
 class GetHourlyWeatherUseCase(
