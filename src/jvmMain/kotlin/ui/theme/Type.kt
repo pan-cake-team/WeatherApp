@@ -17,7 +17,8 @@ private fun CustomTypography() = Typography(
         fontResources("aeonik_bold.otf", FontWeight.Bold, FontStyle.Normal)
     )
 )
-private val Poppins =  FontFamily(
+
+private val Poppins = FontFamily(
     fontResources("poppins_regular.ttf", FontWeight.Normal, FontStyle.Normal),
     fontResources("poppins_semi_bold.ttf", FontWeight.SemiBold, FontStyle.Normal),
 )
@@ -72,4 +73,10 @@ val typography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = textSize128,
     ),
+    subtitle1 = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.W400,
+        fontSize = textSize96
+
+    )
 )
