@@ -15,7 +15,6 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 import kotlinx.serialization.json.Json
 import org.koin.core.Koin
 import org.koin.core.context.startKoin
@@ -124,7 +123,6 @@ class WeatherServiceImp(
             Location(loc = location)
         }
     }
-
 }
 
 
