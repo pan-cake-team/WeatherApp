@@ -2,7 +2,7 @@ package data.repo
 
 import data.remote.WeatherService
 import data.remote.dto.Location
-import data.remote.dto.WeatherResponse
+import data.remote.response.WeatherResponse
 
 class WeatherRepoImpl(
     private val weatherService: WeatherService,

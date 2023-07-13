@@ -1,6 +1,7 @@
 package domain
 
-import data.remote.dto.WeatherResponse
+import data.remote.response.WeatherResponse
+
 
 class GetWeatherUseCase {
     fun GetWeatherData() {

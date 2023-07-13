@@ -8,10 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import data.remote.WeatherServiceImp
+import data.repository.WeatherRepositoryImp
 import data.remote.initKoin
-import di.weatherModule
 import kotlinx.coroutines.runBlocking
-import org.koin.core.context.GlobalContext.startKoin
 import ui.theme.TextPrimary
 import ui.theme.textSize80
 import ui.theme.typography
@@ -37,9 +36,10 @@ fun App() {
 fun main() {
     runBlocking {
         val weatherService = WeatherServiceImp.create()
-        val dailyWeather = weatherService.getDailyWeather()
-        val hourlyWeather = weatherService.getHourWeather()
 
+        val repository = WeatherRepositoryImp(weatherService)
+        val dailyWeather = repository.getDailyWeather(40.75872069597532, -73.98529171943665)
+        val hourlyWeather = repository.getHourWeather(40.75872069597532, -73.98529171943665)
 
         println(dailyWeather)
         println(hourlyWeather)
