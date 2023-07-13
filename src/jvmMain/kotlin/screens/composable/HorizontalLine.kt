@@ -1,8 +1,7 @@
 package screens.composable
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -13,5 +12,6 @@ fun HorizontalLine() {
     Spacer(modifier = Modifier
         .height(1.dp)
         .background(Divider)
+        .fillMaxWidth()
     )
 }

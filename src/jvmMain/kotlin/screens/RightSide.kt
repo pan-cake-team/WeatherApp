@@ -19,7 +19,7 @@ fun RightSide() {
     Box(Modifier.fillMaxHeight().background(color = Cards)) {
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.width(Space360),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)){
@@ -81,7 +81,7 @@ fun RightSide() {
                     verticalArrangement = Arrangement.spacedBy(Space16),
                     modifier = Modifier
                 ) {
-                    items(count = 40) {
+                    items(count = 4) {
                         NextDayForCastItem()
                     }
                 }

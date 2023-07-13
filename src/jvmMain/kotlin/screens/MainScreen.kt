@@ -46,7 +46,7 @@ fun MainContent() {
         ) {
 
             Box(
-                modifier = Modifier.padding(40.dp).fillMaxHeight(),
+                modifier = Modifier.padding(40.dp).fillMaxWidth(.6f).fillMaxHeight(),
             ) {
                 DateCard(
                     modifier = Modifier
@@ -54,9 +54,11 @@ fun MainContent() {
 
                 )
 
+
                 Column(
                     modifier = Modifier
-                        .align(Alignment.BottomEnd),
+                        .align(Alignment.BottomEnd)
+                        .wrapContentWidth(),
                     verticalArrangement = Arrangement.Bottom,
                     horizontalAlignment = Alignment.End,
                 ) {
