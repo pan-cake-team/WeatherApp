@@ -1,10 +1,10 @@
 package domain
 
 import data.remote.dto.Location
-import data.repo.WeatherRepo
+import data.repository.WeatherRepository
 
 class GetCurrentLocationUseCase(
-    private val weatherRepo: WeatherRepo
+    private val weatherRepo: WeatherRepository
 ) {
 
     suspend operator fun invoke(): Location {

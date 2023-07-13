@@ -3,6 +3,7 @@ package data.repository
 import data.remote.WeatherService
 import data.domain.entity.DailyWeather
 import data.domain.entity.HourlyWeather
+import data.remote.dto.Location
 import data.remote.response.mapper.toDailyWeather
 import data.remote.response.mapper.toHourlyWeather
 
@@ -17,5 +18,7 @@ class WeatherRepositoryImp(private val weatherService: WeatherService) : Weather
         return weatherService.getHourWeather(lat,lon).toHourlyWeather()
     }
 
-
+    override suspend fun getCurrentLocation(): Location {
+        return weatherService.getLocation()
+    }
 }
