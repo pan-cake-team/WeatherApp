@@ -7,13 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
-import data.WeatherServiceImp
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
+import data.remote.WeatherServiceImp
+import data.repository.WeatherRepositoryImp
 import kotlinx.coroutines.runBlocking
 import ui.theme.TextPrimary
 import ui.theme.textSize80
@@ -38,9 +33,10 @@ fun App() {
 fun main() {
     runBlocking {
         val weatherService = WeatherServiceImp.create()
-        val dailyWeather = weatherService.getDailyWeather()
-        val hourlyWeather = weatherService.getHourWeather()
 
+        val repository = WeatherRepositoryImp(weatherService)
+        val dailyWeather = repository.getDailyWeather(40.75872069597532, -73.98529171943665)
+        val hourlyWeather = repository.getHourWeather(40.75872069597532, -73.98529171943665)
 
         println(dailyWeather)
         println(hourlyWeather)

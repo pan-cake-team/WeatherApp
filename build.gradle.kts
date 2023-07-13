@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+
 group = "com.pancake.weatherapp"
 version = "1.0-SNAPSHOT"
 
@@ -48,4 +49,5 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+
 }
