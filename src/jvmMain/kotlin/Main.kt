@@ -1,7 +1,6 @@
+
 import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,6 +13,9 @@ import kotlinx.coroutines.runBlocking
 import ui.theme.TextPrimary
 import ui.theme.textSize80
 import ui.theme.typography
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
+import screens.MainScreen
 
 
 @Composable
@@ -24,16 +26,15 @@ fun App() {
 
 
     MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text, style = typography.h1, color = TextPrimary, fontSize = textSize80)
-        }
+        MainScreen()
     }
 }
 
 
-fun main() {
+fun main()= application {
+    Window(title = "Weather", onCloseRequest = ::exitApplication) {
+        App()
+
     runBlocking {
         val weatherService = WeatherServiceImp.create()
 
