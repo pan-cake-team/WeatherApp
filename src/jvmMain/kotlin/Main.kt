@@ -1,17 +1,12 @@
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.MaterialTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.Alignment
@@ -19,16 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import data.remote.WeatherServiceImp
-import data.remote.initKoin
-import data.repository.WeatherRepositoryImp
 import data.repository.WeatherRepositoryImp
 import kotlinx.coroutines.runBlocking
 import org.koin.core.Koin
-import screens.MainScreen
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
+
 import di.initKoin
-import org.koin.core.Koin
+
 import ui.screens.left_side.LeftSide
 import ui.screens.right_side.RightSide
 

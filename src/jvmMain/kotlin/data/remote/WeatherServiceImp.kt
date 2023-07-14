@@ -5,7 +5,6 @@ import data.remote.dto.IntervalDTO
 import data.remote.dto.Location
 import data.remote.dto.WeatherDataDTO
 import data.remote.response.WeatherResponse
-import di.weatherModule
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -14,8 +13,6 @@ import io.ktor.client.request.get
 import io.ktor.serialization.gson.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.core.Koin
-import org.koin.core.context.startKoin
 import java.net.URL
 
 
@@ -34,31 +31,20 @@ class WeatherServiceImp(
                 }
             )
         }
-
-        private const val HTTPS_SCHEME = "https"
-        private const val BASE_URL = "api.tomorrow.io"
-        private const val FIELDS_VULUE_DAILY = "temperature,weatherCode,windGust,temperatureMin,windSpeed"
-        private const val FIELDS_VULUE_HOURLY = "temperature,weatherCode"
-        private const val TIME_STEPS_DAILY = "1d"
-        private const val TIME_STEPS_HOURLY = "1h"
-        private const val CAIRO_TIME_ZONE = "Africa/Cairo"
-        private const val TIME_LINES = "timelines"
-        private const val LOCATION = "location"
-        private const val FIELDS = "fields"
-        private const val TIME_STEPS = "timesteps"
-        private const val UNITS = "units"
-        private const val APIKEY = "apikey"
-        private const val APIKEY_VULUE = "q95QTAsN8jVyhlFXgis2tgjUygiK4r5w"
-        private const val TIME_ZONE = "timezone"
-        private const val CELSIUS_UNITS = "metric"
     }
     override suspend fun getDailyWeather(lat: Double, lon: Double): List<IntervalDTO> {
         val response = client.get {
+
+
+
         }.body<WeatherResponse>()
         return wrapResponse(response)
     }
     override suspend fun getHourWeather(lat: Double, lon: Double):  List<IntervalDTO> {
         val response = client.get {
+
+
+
         }.body<WeatherResponse>()
         return wrapResponse(response)
     }
@@ -90,9 +76,3 @@ class WeatherServiceImp(
         }
     }
 }
-
-
-fun initKoin(): Koin =
-    startKoin {
-        modules(weatherModule)
-    }.koin

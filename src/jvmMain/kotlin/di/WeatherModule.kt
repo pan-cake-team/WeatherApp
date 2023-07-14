@@ -8,11 +8,6 @@ import domain.GetCityLocationUseCase
 import domain.GetCurrentLocationUseCase
 import domain.GetDailyWeatherUseCase
 import domain.GetHourlyWeatherUseCase
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
-import kotlinx.serialization.json.Json
 import org.koin.core.Koin
 import org.koin.dsl.module
 import org.koin.core.context.startKoin
@@ -23,16 +18,7 @@ import org.koin.core.module.dsl.bind
 
 
 val weatherModule = module {
-    single {
-        HttpClient(CIO) {
-            install(ContentNegotiation) {
-                json(Json {
-                    ignoreUnknownKeys = true
-                }
-                )
-            }
-        }
-    }
+
     singleOf(::WeatherServiceImp) { bind<WeatherService>() }
     singleOf(::WeatherRepositoryImp) { bind<WeatherRepository>() }
     single { GetDailyWeatherUseCase(get(), get()) }
