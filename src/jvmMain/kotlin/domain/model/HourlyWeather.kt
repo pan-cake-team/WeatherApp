@@ -1,7 +1,8 @@
 package domain.model
 
 data class HourlyWeather(
-    val date: String,
+    val time: String,
     val temperature: Double,
-    val weatherCode: Int,
+    val weatherType: String,
+    val weatherIconUrl: String
 )
