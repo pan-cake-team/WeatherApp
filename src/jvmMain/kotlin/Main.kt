@@ -4,8 +4,11 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import data.remote.WeatherServiceImp
+import data.repository.WeatherRepositoryImp
 import org.koin.core.Koin
 import di.initKoin
+import kotlinx.coroutines.runBlocking
 import ui.screens.MainScreen
 
 
@@ -25,18 +28,18 @@ fun main()= application {
     Window(title = "Weather", onCloseRequest = ::exitApplication) {
         App(koin)
 
-//
-//        runBlocking {
-//
-//            val weatherService = WeatherServiceImp.create()
-//
-//            val repository = WeatherRepositoryImp(weatherService)
-//            val dailyWeather = repository.getDailyWeather(40.75872069597532, -73.98529171943665)
+
+        runBlocking {
+
+            val weatherService = WeatherServiceImp.create()
+
+            val repository = WeatherRepositoryImp(weatherService)
+            val dailyWeather = repository.getForecastDay()
 //            val hourlyWeather = repository.getHourWeather(40.75872069597532, -73.98529171943665)
 //
 //
-//            println(dailyWeather)
+            println(dailyWeather)
 //            println(hourlyWeather)
-//        }
+        }
     }
 }
