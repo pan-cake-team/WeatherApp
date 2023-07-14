@@ -25,21 +25,24 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                val ktor_version = "2.3.2"
-                val koinVersion = "3.4.2"
-
-                implementation("io.ktor:ktor-client-core:$ktor_version")
-                implementation("io.ktor:ktor-client-cio:$ktor_version")
-                implementation("io.ktor:ktor-client-okhttp:$ktor_version")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-                implementation("io.ktor:ktor-serialization-gson:$ktor_version")
-                implementation("io.insert-koin:koin-core:$koinVersion")
                 implementation(compose.desktop.currentOs)
-
-//                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
+        val commonMain by getting {
+            dependencies {
+                val ktor_version = "2.3.2"
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+                implementation("io.ktor:ktor-client-java:$ktor_version")
+                implementation("io.insert-koin:koin-core:3.4.2")
+                implementation("io.ktor:ktor-client-json:1.6.3")
+                implementation("io.ktor:ktor-client-logging:1.6.3")
+                implementation("io.ktor:ktor-client-serialization:1.6.3")
+                implementation("io.ktor:ktor-serialization-gson:2.3.2")
+                implementation("com.google.code.gson:gson:2.10.1")
+            }
+        }
+
         val jvmTest by getting
     }
 }
