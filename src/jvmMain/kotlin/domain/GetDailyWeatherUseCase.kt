@@ -2,38 +2,30 @@ package domain
 
 import domain.model.DailyWeather
 import data.repository.WeatherRepository
-import screens.DailyUiState
-import screens.DaysInterval
+import ui.screens.right_side.DaysInterval
 
 
 class GetDailyWeatherUseCase(
-    private val dailyWeatherResponse: WeatherRepository
+    private val dailyWeatherResponse: WeatherRepository,
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
 ) {
-    suspend operator fun invoke(lat: Double, lon: Double): DailyUiState {
-        return dailyWeatherResponse.getDailyWeather(lat, lon).toDailyUiState()
+    suspend operator fun invoke() = getDailyCurrentLocationWeather()
+
+    private suspend fun getDailyCurrentLocationWeather(): List<DaysInterval>{
+        val currentLocation = getCurrentLocationUseCase()
+        return dailyWeatherResponse.getDailyWeather(currentLocation.lat, currentLocation.long).toDaysInterval()
     }
 }
 
-private fun List<DailyWeather>.toDailyUiState(): DailyUiState {
-    return this.let { dailyWeathers ->
-        DailyUiState(
-            todayTemp = dailyWeathers[0].temperature.toInt(),
-            todayMinTemp = dailyWeathers[0].temperatureMin.toInt(),
-            windSpeed = dailyWeathers[0].windSpeed,
-            precipitation = dailyWeathers[0].windSpeed.toInt(),
-            days = dailyWeathers.drop(1).map { it.toDailyInterval() },
-        )
-    }
-
-}
-
-private fun DailyWeather.toDailyInterval(): DaysInterval {
-    return this.let {
+private fun List<DailyWeather>.toDaysInterval(): List<DaysInterval> {
+    return this.map { dailyWeathers ->
         DaysInterval(
-            day = date,
-            minTemp = temperatureMin.toInt(),
-            maxTemp = temperature.toInt(),
-            weatherType = weatherCode.toString()
+            day = dailyWeathers.date,
+            minTemp = dailyWeathers.temperatureMin.toInt(),
+            maxTemp = dailyWeathers.temperature.toInt(),
+            weatherType = dailyWeathers.weatherCode.toString(),
+            windGust = dailyWeathers.windGust,
+            windSpeed = dailyWeathers.windSpeed,
         )
     }
 }

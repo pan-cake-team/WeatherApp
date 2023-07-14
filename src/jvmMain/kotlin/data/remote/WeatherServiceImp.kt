@@ -126,7 +126,6 @@ class WeatherServiceImp(
 }
 
 
-
 fun initKoin(): Koin =
     startKoin {
         modules(weatherModule)

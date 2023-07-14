@@ -1,4 +1,4 @@
-package screens.composable
+package ui.screens.composable
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
@@ -10,12 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import ui.screens.left_side.HourlyUiState
 import ui.theme.Cards
 import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
-fun DateCard(modifier: Modifier = Modifier) {
+fun DateCard(
+    state: HourlyUiState,
+    modifier: Modifier = Modifier
+) {
 
     Box(
         modifier = modifier
@@ -25,7 +29,7 @@ fun DateCard(modifier: Modifier = Modifier) {
     ) {
         Text(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
-            text = "28 Oct 2023",
+            text = state.date,
             style = typography.h3,
             color = TextSecondary,
         )
@@ -35,5 +39,5 @@ fun DateCard(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PreviewCard() {
-    DateCard()
+
 }

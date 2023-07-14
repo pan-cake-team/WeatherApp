@@ -1,4 +1,4 @@
-package screens.composable
+package ui.screens.composable
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
