@@ -3,8 +3,9 @@ package domain.model
 data class DailyWeather(
     val date : String,
     val temperature: Double,
-    val windGust: Double,
+    val humidity: Double,
     val temperatureMin: Double,
-    val weatherCode: Int,
+    val weatherType: String,
+    val weatherIconUrl: String,
     val windSpeed: Double,
 )
