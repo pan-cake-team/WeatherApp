@@ -2,7 +2,7 @@ package domain
 
 import domain.model.DailyWeather
 import data.repository.WeatherRepository
-import ui.screens.right_side.DaysInterval
+import ui.screens.DaysInterval
 
 
 class GetDailyWeatherUseCase(

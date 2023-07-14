@@ -1,29 +1,23 @@
-package ui.screens.left_side
+package ui.screens.composable
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.koin.java.KoinJavaComponent.inject
-import ui.screens.composable.DateCard
-import ui.screens.composable.HorizontalLine
-import ui.screens.composable.SpacerVertical
-import ui.screens.composable.WeatherTimeCard
+import ui.screens.HourlyUiState
 import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
 fun LeftSide(
-    viewModel: HourlySideViewModel
+    state: HourlyUiState,
 ) {
 
-    val state by viewModel.state.collectAsState()
+
 
     Box(
         modifier = Modifier.padding(40.dp).fillMaxWidth(.6f).fillMaxHeight(),

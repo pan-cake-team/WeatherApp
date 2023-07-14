@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ui.screens.left_side.HourlyUiState
+import ui.screens.HourlyUiState
 import ui.theme.Cards
 import ui.theme.TextSecondary
 import ui.theme.typography

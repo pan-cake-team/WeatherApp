@@ -1,5 +1,18 @@
-package ui.screens.right_side
+package ui.screens
 
+data class HourlyUiState(
+    val isLoading: Boolean = true,
+    val isError: Boolean = false,
+    val date: String = "",
+    val weatherType: String = "",
+    val values: List<DayHourIntervals> = emptyList()
+)
+
+data class DayHourIntervals(
+    val hour: String = "1212",
+    val weatherType: String = "asdffsaf",
+    val temp: Int = 0,
+)
 
 data class DailyUiState(
     val isLoading: Boolean = true,

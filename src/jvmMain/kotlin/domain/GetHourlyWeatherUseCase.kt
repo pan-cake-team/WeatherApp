@@ -2,7 +2,7 @@ package domain
 
 import domain.model.HourlyWeather
 import data.repository.WeatherRepository
-import ui.screens.left_side.DayHourIntervals
+import ui.screens.DayHourIntervals
 
 class GetHourlyWeatherUseCase(
     private val hourlyWeather: WeatherRepository,

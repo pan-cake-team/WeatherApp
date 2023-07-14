@@ -12,9 +12,8 @@ import org.koin.core.Koin
 import org.koin.dsl.module
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf
-import ui.screens.left_side.HourlySideViewModel
-import ui.screens.right_side.DailySideViewModel
 import org.koin.core.module.dsl.bind
+import ui.screens.MainViewModel
 
 
 val weatherModule = module {
@@ -24,8 +23,7 @@ val weatherModule = module {
     single { GetDailyWeatherUseCase(get(), get()) }
     single { GetHourlyWeatherUseCase(get(), get()) }
     single { GetCurrentLocationUseCase(get()) }
-    single {DailySideViewModel()}
-    single {HourlySideViewModel()}
+    single {MainViewModel()}
     single { GetCityLocationUseCase(get()) }
 
 
