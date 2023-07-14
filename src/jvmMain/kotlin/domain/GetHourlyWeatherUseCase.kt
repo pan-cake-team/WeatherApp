@@ -2,28 +2,28 @@ package domain
 
 import domain.model.HourlyWeather
 import data.repository.WeatherRepository
-import screens.DayHourIntervals
-import screens.HourlyUiState
+import ui.screens.left_side.DayHourIntervals
 
 class GetHourlyWeatherUseCase(
-    private val hourlyWeather: WeatherRepository
+    private val hourlyWeather: WeatherRepository,
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
 ) {
-    suspend operator fun invoke(lat: Double, lon: Double): HourlyUiState {
-        return hourlyWeather.getHourWeather(lat, lon).toHourlyUiState()
+    suspend operator fun invoke() = getHourlyCurrentLocationWeather()
+
+    private suspend fun getHourlyCurrentLocationWeather(): List<DayHourIntervals> {
+        val currentLocation = getCurrentLocationUseCase()
+        return hourlyWeather.getHourWeather(currentLocation.lat, currentLocation.long).toDayHourIntervals()
     }
 }
 
-private fun List<HourlyWeather>.toHourlyUiState(): HourlyUiState {
+private fun List<HourlyWeather>.toDayHourIntervals(): List<DayHourIntervals> {
 
-    return HourlyUiState(
-        values = this.map { it.toHourlyIntervals() }
-    )
+    return this.map { hourlyInterval ->
+        DayHourIntervals(
+            hour = hourlyInterval.date,
+            weatherType = hourlyInterval.weatherCode.toString(),
+            temp = hourlyInterval.temperature.toInt(),
+        )
+    }
 }
 
-private fun HourlyWeather.toHourlyIntervals(): DayHourIntervals {
-    return DayHourIntervals(
-        hour = date,
-        temp = temperature.toInt(),
-        weatherType = weatherCode.toString(),
-    )
-}
