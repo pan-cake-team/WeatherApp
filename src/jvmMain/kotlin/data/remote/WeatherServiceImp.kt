@@ -4,8 +4,6 @@ import com.google.gson.Gson
 import data.remote.dto.ForecastDayDTO
 import data.remote.dto.IntervalDTO
 import data.remote.dto.Location
-import data.remote.dto.WeatherDataDTO
-import data.remote.response.New_Response
 import data.remote.response.WeatherResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -37,37 +35,41 @@ class WeatherServiceImp(
     }
 
     override suspend fun getDailyWeather(lat: Double, lon: Double): List<IntervalDTO> {
-        val response = client.get {
-
-
-        }.body<WeatherResponse>()
-        return wrapResponse(response)
+        TODO("Not yet implemented")
     }
 
     override suspend fun getHourWeather(lat: Double, lon: Double): List<IntervalDTO> {
-        val response = client.get {
-
-
-        }.body<WeatherResponse>()
-        return wrapResponse(response)
+        TODO("Not yet implemented")
     }
 
-    private fun wrapResponse(response: WeatherResponse): List<IntervalDTO> {
-        return response.data.timelines.flatMap { timeline ->
-            timeline.intervals.map { interval ->
-                IntervalDTO(
-                    startTime = interval.startTime,
-                    values = WeatherDataDTO(
-                        windGust = interval.values.windGust,
-                        temperature = interval.values.temperature,
-                        temperatureMin = interval.values.temperatureMin,
-                        weatherCode = interval.values.weatherCode,
-                        windSpeed = interval.values.windSpeed
-                    )
-                )
-            }
-        }
-    }
+//    override suspend fun getDailyWeather(lat: Double, lon: Double): List<IntervalDTO> {
+//        val response = client.get {
+//        }.body<WeatherResponse>()
+//        return wrapResponse(response)
+//    }
+//
+//    override suspend fun getHourWeather(lat: Double, lon: Double): List<IntervalDTO> {
+//        val response = client.get {
+//        }.body<WeatherResponse>()
+//        return wrapResponse(response)
+//    }
+//
+//    private fun wrapResponse(response: WeatherResponse): List<IntervalDTO> {
+//        return response.data.timelines.flatMap { timeline ->
+//            timeline.intervals.map { interval ->
+//                IntervalDTO(
+//                    startTime = interval.startTime,
+//                    values = WeatherDataDTO(
+//                        windGust = interval.values.windGust,
+//                        temperature = interval.values.temperature,
+//                        temperatureMin = interval.values.temperatureMin,
+//                        weatherCode = interval.values.weatherCode,
+//                        windSpeed = interval.values.windSpeed
+//                    )
+//                )
+//            }
+//        }
+//    }
 
     override suspend fun getLocation(): Location {
         return withContext(Dispatchers.IO) {
@@ -84,7 +86,7 @@ class WeatherServiceImp(
             "http://api.weatherapi.com/v1/forecast.json?key=3ef614045e38444fac0205724231407&q=Baghdad&days=1&hourly=1"
         val response = client.get {
             url(url)
-        }.body<New_Response>()
+        }.body<WeatherResponse>()
        return response.forecast.forecastday
     }
 
