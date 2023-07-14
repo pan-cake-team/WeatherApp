@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class WeatherViewModel(
-    private val getCurrentLocation: GetCurrentLocationUseCase,
-    private val getHourlyWeather: GetHourlyWeatherUseCase,
-    private val getDailyWeather: GetDailyWeatherUseCase,
-//    private val getCityLocation: GetCityLocationUseCase,
-    ) {
+class WeatherViewModel: KoinComponent {
+
+
+    private val getCurrentLocation: GetCurrentLocationUseCase by inject()
+    private val getHourlyWeather: GetHourlyWeatherUseCase by inject()
+    private val getDailyWeather: GetDailyWeatherUseCase by inject()
 
     private val _dailyUiState = MutableStateFlow(DailyUiState())
     val dailyUiState = _dailyUiState.asStateFlow()

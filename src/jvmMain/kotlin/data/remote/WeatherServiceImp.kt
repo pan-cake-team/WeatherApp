@@ -1,26 +1,23 @@
 package data.remote
 
-import data.remote.dto.IntervalDTO
-import data.remote.dto.WeatherDataDTO
 import com.google.gson.Gson
+import data.remote.dto.IntervalDTO
 import data.remote.dto.Location
+import data.remote.dto.WeatherDataDTO
 import data.remote.response.WeatherResponse
 import di.weatherModule
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.java.Java
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
+import io.ktor.serialization.gson.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 import org.koin.core.Koin
 import org.koin.core.context.startKoin
 import java.net.URL
 
-import okhttp3.HttpUrl
 
 class WeatherServiceImp(
     private val client: HttpClient
@@ -30,12 +27,9 @@ class WeatherServiceImp(
     companion object {
         fun create(): WeatherService {
             return WeatherServiceImp(
-                client = HttpClient(CIO) {
+                client = HttpClient(Java) {
                     install(ContentNegotiation) {
-                        json(Json {
-                            ignoreUnknownKeys = true
-                        }
-                        )
+                        gson()
                     }
                 }
             )
@@ -54,45 +48,17 @@ class WeatherServiceImp(
         private const val TIME_STEPS = "timesteps"
         private const val UNITS = "units"
         private const val APIKEY = "apikey"
-        private const val APIKEY_VULUE = "4GlgD02C1ehNPP1kvu5iFj2m9VAuZjE5"
+        private const val APIKEY_VULUE = "q95QTAsN8jVyhlFXgis2tgjUygiK4r5w"
         private const val TIME_ZONE = "timezone"
         private const val CELSIUS_UNITS = "metric"
     }
     override suspend fun getDailyWeather(lat: Double, lon: Double): List<IntervalDTO> {
-        val urlString = HttpUrl.Builder()
-            .scheme(HTTPS_SCHEME)
-            .host(BASE_URL)
-            .addPathSegments("v4")
-            .addPathSegment(TIME_LINES)
-            .addQueryParameter(APIKEY, APIKEY_VULUE)
-            .addQueryParameter(FIELDS, FIELDS_VULUE_DAILY)
-            .addQueryParameter(LOCATION,"$lat,$lon")
-            .addQueryParameter(TIME_STEPS, TIME_STEPS_DAILY)
-            .addQueryParameter(UNITS, CELSIUS_UNITS)
-            .addQueryParameter(TIME_ZONE, CAIRO_TIME_ZONE)
-            .build()
-            .toString()
         val response = client.get {
-            url(urlString)
         }.body<WeatherResponse>()
         return wrapResponse(response)
     }
     override suspend fun getHourWeather(lat: Double, lon: Double):  List<IntervalDTO> {
-        val urlString = HttpUrl.Builder()
-            .scheme(HTTPS_SCHEME)
-            .host(BASE_URL)
-            .addPathSegments("v4")
-            .addPathSegment(TIME_LINES)
-            .addQueryParameter(APIKEY, APIKEY_VULUE)
-            .addQueryParameter(FIELDS, FIELDS_VULUE_HOURLY)
-            .addQueryParameter(LOCATION,"$lat,$lon")
-            .addQueryParameter(TIME_STEPS, TIME_STEPS_HOURLY)
-            .addQueryParameter(UNITS, CELSIUS_UNITS)
-            .addQueryParameter(TIME_ZONE, CAIRO_TIME_ZONE)
-            .build()
-            .toString()
         val response = client.get {
-            url(urlString)
         }.body<WeatherResponse>()
         return wrapResponse(response)
     }

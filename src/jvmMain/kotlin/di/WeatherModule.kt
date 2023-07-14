@@ -19,6 +19,6 @@ val weatherModule = module {
     single { GetHourlyWeatherUseCase(get()) }
     single { GetCurrentLocationUseCase(get()) }
 //    single { GetCityLocationUseCase(get()) }
-    single { WeatherViewModel( get(), get(), get()) }
+    single { WeatherViewModel( ) }
 
 }
