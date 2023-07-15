@@ -2,10 +2,12 @@ package domain
 
 import data.repository.WeatherRepository
 import domain.model.WeatherModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class SearchCityUseCase(
-    private val weatherRepository: WeatherRepository,
-) {
+class SearchCityUseCase: KoinComponent{
+
+    private val weatherRepository: WeatherRepository by inject()
 
     suspend operator fun invoke(city: String) = searchCity(city)
 
