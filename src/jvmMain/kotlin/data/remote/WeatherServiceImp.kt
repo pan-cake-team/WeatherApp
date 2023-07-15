@@ -9,11 +9,7 @@ import data.util.Constants.QUERY
 import data.util.HttpRoute
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.java.Java
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.*
-import io.ktor.serialization.gson.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
@@ -22,22 +18,6 @@ import java.net.URL
 open class WeatherServiceImp(
     private val client: HttpClient
 ) : WeatherService {
-
-
-    companion object {
-        fun create(): WeatherService {
-            return WeatherServiceImp(
-                client = HttpClient(Java) {
-                    install(ContentNegotiation) {
-                        gson()
-                    }
-                    defaultRequest {
-                        url(HttpRoute.BASE_URL)
-                    }
-                }
-            )
-        }
-    }
 
     override suspend fun getLocation(): CurrentLocation {
         return withContext(Dispatchers.IO) {
