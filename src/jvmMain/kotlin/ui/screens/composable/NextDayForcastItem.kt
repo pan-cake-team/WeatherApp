@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import ui.screens.DaysInterval
 import ui.theme.Divider
 import ui.theme.IconCloudRaining
 import ui.theme.IconsSurface
@@ -30,7 +31,7 @@ import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
-fun NextDayForCastItem() {
+fun NextDayForCastItem(daysInterval: DaysInterval) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(Radius8))
@@ -62,24 +63,17 @@ fun NextDayForCastItem() {
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.padding(start = Space8, end = Space16)
             ) {
-                Text(text = "Tuesday,Oct 28", style = typography.h5, color = TextPrimary)
-                Text(text = "Heavy Rain", style = typography.h6, color = TextSecondary)
+                Text(text = daysInterval.date, style = typography.h5, color = TextPrimary)
+                Text(text = daysInterval.weatherType, style = typography.h6, color = TextSecondary)
             }
             HorizontalDivider()
 
             Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier) {
-                Text("11°", style = typography.h5, color = TextPrimary)
-                Text("3°", style = typography.h6, color = TextSecondary)
+                Text("${daysInterval.maxTemp}°", style = typography.h5, color = TextPrimary)
+                Text("${daysInterval.minTemp}°", style = typography.h6, color = TextSecondary)
             }
         }
     }
 
 }
 
-@Preview
-@Composable
-private fun Preview() {
-    Box(modifier = Modifier.background(Color.Black).fillMaxSize()) {
-        NextDayForCastItem()
-    }
-}

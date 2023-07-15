@@ -4,6 +4,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,7 +30,7 @@ fun RightSide(
             }
 
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("11°", style = typography.h1, color = TextPrimary)
+                Text("${state.todayTemp}°", style = typography.h1, color = TextPrimary)
                 Text(
                     "c",
                     style = typography.subtitle1,
@@ -42,7 +43,7 @@ fun RightSide(
                     Icon(painter = painterResource(IconSun), null, tint = TextSecondary)
                     Text(
                         modifier = Modifier.padding(start = Space8),
-                        text = "Lower temperature, 5°c",
+                        text = "Lower temperature, ${state.todayMinTemp}°c",
                         style = typography.h6,
                         color = TextPrimary
                     )
@@ -53,7 +54,7 @@ fun RightSide(
                     Icon(painter = painterResource(IconWind), null, tint = TextSecondary)
                     Text(
                         modifier = Modifier.padding(start = Space8),
-                        text = "Wind speed, 2 km/h",
+                        text = "Wind speed, ${state.windSpeed} km/h",
                         style = typography.h6,
                         color = TextPrimary
                     )
@@ -64,7 +65,7 @@ fun RightSide(
                     Icon(painter = painterResource(IconWaterDrops), null, tint = TextSecondary)
                     Text(
                         modifier = Modifier.padding(start = Space8),
-                        text = "Precipitation, 2%",
+                        text = "Precipitation, ${state.precipitation}%",
                         style = typography.h6,
                         color = TextPrimary
                     )
@@ -84,8 +85,8 @@ fun RightSide(
                     verticalArrangement = Arrangement.spacedBy(Space16),
                     modifier = Modifier
                 ) {
-                    items(count = 4) {
-                        NextDayForCastItem()
+                    items( state.days) {
+                        NextDayForCastItem(it)
                     }
                 }
             }
