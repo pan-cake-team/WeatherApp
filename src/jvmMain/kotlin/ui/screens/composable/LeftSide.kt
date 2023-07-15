@@ -8,13 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ui.screens.HourlyUiState
+import ui.screens.MainUIState
 import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
 fun LeftSide(
-    state: HourlyUiState,
+    state: MainUIState,
 ) {
 
 
@@ -44,7 +44,7 @@ fun LeftSide(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(start = 16.dp),
             ) {
-                items(state.values) { hourlyData ->
+                items(state.hours) { hourlyData ->
                     WeatherTimeCard(time = hourlyData.hour, number = hourlyData.temp)
                 }
             }

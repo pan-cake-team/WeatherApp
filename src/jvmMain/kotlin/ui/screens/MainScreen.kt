@@ -19,20 +19,14 @@ fun MainScreen(
     viewModel: MainViewModel,
 ) {
 
-    val dailyUiState by viewModel.state2.collectAsState()
-    val hourlyUiState by viewModel.state.collectAsState()
+    val State by viewModel.state.collectAsState()
 
-    MainContent(
-        dailyUiState = dailyUiState,
-        hourlyUiState = hourlyUiState,
-    )
+    MainContent(State)
 }
 
 @Composable
 fun MainContent(
-    dailyUiState: DailyUiState,
-    hourlyUiState: HourlyUiState,
-
+    state: MainUIState,
 ) {
     Box(
         contentAlignment = Alignment.BottomEnd,
@@ -51,9 +45,9 @@ fun MainContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            LeftSide(hourlyUiState)
+            LeftSide(state)
 
-            RightSide(dailyUiState)
+            RightSide(state)
 
         }
     }
