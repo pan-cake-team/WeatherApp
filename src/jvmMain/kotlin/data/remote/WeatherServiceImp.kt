@@ -3,19 +3,23 @@ package data.remote
 import com.google.gson.Gson
 import data.remote.dto.CurrentLocation
 import data.remote.dto.WeatherForecastDto
+import data.util.Constants.DAYS
+import data.util.Constants.KEY
+import data.util.Constants.QUERY
+import data.util.HttpRoute
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
+import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
-import io.ktor.client.request.url
+import io.ktor.client.request.*
 import io.ktor.serialization.gson.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
 
 
-class WeatherServiceImp(
+open class WeatherServiceImp(
     private val client: HttpClient
 ) : WeatherService {
 
@@ -27,6 +31,9 @@ class WeatherServiceImp(
                     install(ContentNegotiation) {
                         gson()
                     }
+                    defaultRequest {
+                        url(HttpRoute.BASE_URL)
+                    }
                 }
             )
         }
@@ -34,7 +41,7 @@ class WeatherServiceImp(
 
     override suspend fun getLocation(): CurrentLocation {
         return withContext(Dispatchers.IO) {
-            val url = URL("https://ipinfo.io/json")
+            val url = URL(HttpRoute.LOCATION_URL)
             val json = url.readText()
             val data = Gson().fromJson(json, CurrentLocation::class.java)
             val location = data.loc
@@ -42,13 +49,22 @@ class WeatherServiceImp(
         }
     }
 
-    override suspend fun getForecast(): WeatherForecastDto {
-        val url =
-            "http://api.weatherapi.com/v1/forecast.json?key=3ef614045e38444fac0205724231407&q=cairo&days=9"
-        val response = client.get {
-            url(url)
-        }.body<WeatherForecastDto>()
-       return response
+    override suspend fun getForecast(latLongLocation: String): WeatherForecastDto {
+        return client.get {
+            url(HttpRoute.FORECAST)
+            parameter(KEY, HttpRoute.KEY)
+            parameter(QUERY, latLongLocation)
+            parameter(DAYS, "9")
+        }.body()
     }
 
+
+    override suspend fun searchForecast(city: String): WeatherForecastDto {
+        return client.get {
+            url(HttpRoute.FORECAST)
+            parameter(KEY, HttpRoute.KEY)
+            parameter(QUERY, city)
+            parameter(DAYS, "9")
+        }.body()
+    }
 }

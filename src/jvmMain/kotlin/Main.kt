@@ -34,12 +34,10 @@ fun main()= application {
             val weatherService = WeatherServiceImp.create()
 
             val repository = WeatherRepositoryImp(weatherService)
-            val dailyWeather = repository.getForecastDay()
-//            val hourlyWeather = repository.getHourWeather(40.75872069597532, -73.98529171943665)
-//
-//
+            val dailyWeather = repository.getForecasts("30.0444,31.2357")
+
             println(dailyWeather)
-//            println(hourlyWeather)
+
         }
     }
 }
