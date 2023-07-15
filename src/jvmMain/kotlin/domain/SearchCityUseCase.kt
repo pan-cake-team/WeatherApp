@@ -10,6 +10,6 @@ class SearchCityUseCase(
     suspend operator fun invoke(city: String) = searchCity(city)
 
     private suspend fun searchCity(city: String): WeatherModel {
-        return weatherRepository.searchForecastDay(city)
+        return weatherRepository.searchForecastDay(city).toWeatherModel()
     }
 }

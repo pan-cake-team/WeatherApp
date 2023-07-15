@@ -4,7 +4,7 @@ import ui.screens.DaysInterval
 
 data class WeatherModel(
     val location: String?,
-    val data: List<DaysForCast>,
+    val data: List<DaysForCast>?,
 )
 
 data class DaysForCast(
@@ -12,22 +12,15 @@ data class DaysForCast(
     val maxTemp: Double?,
     val minTemp: Double?,
     val date: String?,
-    val days: List<WeatherForcastModel>
-)
-
-data class WeatherForcastModel(
-    val dayMaxTemp: Double?,
-    val dayMinTemp: Double?,
-    val dayWindSpeed: Double?,
     val precipitation: Double?,
-    val weatherType: String?,
-    val hourlyWeather: List<HourlyWeather>?,
+    val dayWindSpeed: Double?,
+    val days: List<HourlyWeather>?
 )
 
 data class HourlyWeather(
-    val localtime: String,
-    val temp_c: Double,
-    val weatherType: String,
+    val localtime: String?,
+    val temp_c: Double?,
+    val weatherType: String?,
 )
 
 //data class HourlyWeather(
