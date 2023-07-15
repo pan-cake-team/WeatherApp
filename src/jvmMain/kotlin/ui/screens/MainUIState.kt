@@ -1,11 +1,19 @@
 package ui.screens
 
-data class HourlyUiState(
+
+
+data class MainUIState(
     val isLoading: Boolean = true,
     val isError: Boolean = false,
+    val location: String = "",
+    val todayTemp: Int = 0,
+    val todayMinTemp: Int = 0,
+    val windSpeed: Double = 0.0,
+    val precipitation: Int = 0,
     val date: String = "",
     val weatherType: String = "",
-    val values: List<DayHourIntervals> = emptyList()
+    val hours: List<DayHourIntervals> = emptyList(),
+    val days: List<DaysInterval> = emptyList(),
 )
 
 data class DayHourIntervals(
@@ -14,22 +22,9 @@ data class DayHourIntervals(
     val temp: Int = 0,
 )
 
-data class DailyUiState(
-    val isLoading: Boolean = true,
-    val isError: Boolean = false,
-    val todayTemp: Int = 0,
-    val todayMinTemp: Int = 0,
-    val windSpeed: Double = 0.0,
-    val precipitation: Int = 0,
-    val days: List<DaysInterval> = emptyList(),
-)
-
-
 data class DaysInterval(
-    val day: String = "",
+    val date: String = "",
     val weatherType: String = "",
-    val maxTemp: Int = 0,
-    val minTemp: Int = 0,
-    val windGust: Double,
-    val windSpeed: Double,
+    val maxTemp: Double = 0.0,
+    val minTemp: Double = 0.0,
 )
