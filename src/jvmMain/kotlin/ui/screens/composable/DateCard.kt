@@ -10,14 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ui.screens.HourlyUiState
+import ui.screens.MainUIState
 import ui.theme.Cards
 import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
 fun DateCard(
-    state: HourlyUiState,
+    state: MainUIState,
     modifier: Modifier = Modifier
 ) {
 
