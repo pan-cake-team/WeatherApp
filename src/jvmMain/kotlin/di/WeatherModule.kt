@@ -4,10 +4,15 @@ import data.remote.WeatherService
 import data.remote.WeatherServiceImp
 import data.repository.WeatherRepository
 import data.repository.WeatherRepositoryImp
-import domain.GetCityLocationUseCase
+import data.util.HttpRoute
 import domain.GetCurrentLocationUseCase
 
-import domain.GetHourlyWeatherUseCase
+import domain.SearchCityUseCase
+import io.ktor.client.*
+import io.ktor.client.engine.java.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.gson.*
 import org.koin.core.Koin
 import org.koin.dsl.module
 import org.koin.core.context.startKoin
@@ -18,13 +23,23 @@ import ui.screens.MainViewModel
 
 val weatherModule = module {
 
+
+    single {
+        HttpClient(Java) {
+            install(ContentNegotiation) {
+                gson()
+            }
+            defaultRequest {
+                url(HttpRoute.BASE_URL)
+            }
+        }
+    }
+
     singleOf(::WeatherServiceImp) { bind<WeatherService>() }
     singleOf(::WeatherRepositoryImp) { bind<WeatherRepository>() }
-//    single { GetDailyWeatherUseCase(get(), get()) }
-    single { GetHourlyWeatherUseCase(get(), get()) }
     single { GetCurrentLocationUseCase(get()) }
+    single { SearchCityUseCase(get()) }
     single {MainViewModel()}
-    single { GetCityLocationUseCase(get()) }
 
 
 }
