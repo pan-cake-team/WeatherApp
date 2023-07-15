@@ -19,9 +19,7 @@ import org.koin.dsl.module
 import org.koin.core.context.startKoin
 import ui.screens.MainViewModel
 
-
-val weatherModule = module {
-
+val apiServiceModule = module {
 
     single {
         HttpClient(Java) {
@@ -35,14 +33,25 @@ val weatherModule = module {
     }
 
     single<WeatherService> { WeatherServiceImp(get()) }
-    single<WeatherRepository> { WeatherRepositoryImp(get()) }
+
+}
+
+val repositoryModule = module {
+    single<WeatherRepository> { WeatherRepositoryImp() }
+}
+
+val usecaseModule = module {
     single { GetWeatherUseCase()}
     single { GetCurrentLocationUseCase() }
     single { SearchCityUseCase() }
-    single {MainViewModel()}
-
-
 }
+
+
+val viewModelModule = module {
+    single {MainViewModel()}
+}
+
+val weatherModule = apiServiceModule + repositoryModule + usecaseModule + viewModelModule
 
 fun initKoin(): Koin {
     return startKoin {
