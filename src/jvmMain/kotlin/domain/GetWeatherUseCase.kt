@@ -7,12 +7,15 @@ import data.repository.WeatherRepository
 import domain.model.DaysForCast
 import domain.model.HourlyWeather
 import domain.model.WeatherModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class GetWeatherUseCase(
-    private val weatherRepository: WeatherRepository,
-    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
-) {
+class GetWeatherUseCase: KoinComponent {
+
+    private val weatherRepository: WeatherRepository by inject()
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase by inject()
+
     suspend operator fun invoke() = getDailyCurrentLocationWeather()
 
 
