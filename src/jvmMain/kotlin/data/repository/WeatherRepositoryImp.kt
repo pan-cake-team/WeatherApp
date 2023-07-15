@@ -1,7 +1,8 @@
 package data.repository
 
 import data.remote.WeatherService
-import data.remote.dto.Location
+import data.remote.dto.CurrentLocation
+import data.remote.dto.WeatherForecastDto
 import domain.model.DailyWeather
 import domain.model.Forecast
 import domain.model.HourlyWeather
@@ -41,7 +42,7 @@ class WeatherRepositoryImp(private val weatherService: WeatherService) : Weather
 //        }
 //    }
 
-    override suspend fun getCurrentLocation(): Location {
+    override suspend fun getCurrentLocation(): CurrentLocation {
         return weatherService.getLocation()
     }
 
@@ -53,7 +54,11 @@ class WeatherRepositoryImp(private val weatherService: WeatherService) : Weather
         TODO("Not yet implemented")
     }
 
-    override suspend fun getForecastDay(): List<Forecast> {
+    override suspend fun getForecastDay(): WeatherForecastDto {
+        return weatherService.getForecast()
+    }
+
+    override suspend fun searchForecastDay(city: String): List<Forecast> {
         TODO("Not yet implemented")
     }
 

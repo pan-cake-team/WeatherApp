@@ -26,7 +26,7 @@ fun App(koin: Koin) {
 fun main()= application {
     val koin = initKoin()
     Window(title = "Weather", onCloseRequest = ::exitApplication) {
-        App(koin)
+//        App(koin)
 
 
         runBlocking {
