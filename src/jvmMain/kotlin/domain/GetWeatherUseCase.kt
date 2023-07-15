@@ -3,16 +3,13 @@ package domain
 import data.remote.dto.Forecastday
 import data.remote.dto.Hour
 import data.remote.dto.WeatherForecastDto
-import domain.model.DailyWeather
 import data.repository.WeatherRepository
 import domain.model.DaysForCast
-import domain.model.Forecast
 import domain.model.HourlyWeather
 import domain.model.WeatherModel
-import ui.screens.DaysInterval
 
 
-class GetDailyWeatherUseCase(
+class GetWeatherUseCase(
     private val weatherRepository: WeatherRepository,
     private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
 ) {
