@@ -3,9 +3,13 @@ package data.repository
 import data.remote.WeatherService
 import data.remote.dto.CurrentLocation
 import data.remote.dto.WeatherForecastDto
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class WeatherRepositoryImp(private val weatherService: WeatherService) : WeatherRepository {
+class WeatherRepositoryImp() :KoinComponent, WeatherRepository {
+
+    private val weatherService: WeatherService by inject()
 
 
     override suspend fun getCurrentLocation(): CurrentLocation {
