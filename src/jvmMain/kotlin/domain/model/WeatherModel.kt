@@ -14,12 +14,16 @@ data class DaysForCast(
     val date: String?,
     val precipitation: Double?,
     val dayWindSpeed: Double?,
+    val willItSnow: Int?,
+    val willItRain: Int?,
     val days: List<HourlyWeather>?
 )
 
 data class HourlyWeather(
     val localtime: String?,
     val temp_c: Double?,
+    val hourlyWillItSnow: Int?,
+    val hourlyWillItRain: Int?,
     val weatherType: String?,
 )
 

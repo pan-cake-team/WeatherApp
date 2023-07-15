@@ -24,6 +24,7 @@ class GetDailyWeatherUseCase(
         return weatherRepository.getForecasts(currentLocation.loc).toWeatherModel()
     }
 }
+
 fun WeatherForecastDto.toWeatherModel(): WeatherModel {
     return WeatherModel(
         location = this.location?.let { it.country + "," + it.name },
@@ -40,13 +41,17 @@ fun Forecastday.toDaysForcast(): DaysForCast {
         days = this.hour?.map { it.toHourlyWeather() },
         precipitation = day?.totalprecipMm,
         dayWindSpeed = day?.maxwindKph,
+        willItRain = day?.dailyWillItRain,
+        willItSnow = day?.dailyWillItSnow,
     )
 }
 
 fun Hour.toHourlyWeather(): HourlyWeather {
     return HourlyWeather(
-        localtime = time,
+        localtime = time?.drop(11),
         weatherType = condition?.text,
         temp_c = tempC,
+        hourlyWillItRain = willItRain,
+        hourlyWillItSnow = willItSnow,
     )
 }
