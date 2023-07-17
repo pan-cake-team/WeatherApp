@@ -5,12 +5,29 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
+import kotlinx.coroutines.delay
+import org.koin.core.component.getScopeId
 import ui.screens.DaysInterval
 import ui.screens.MainUIState
 import ui.theme.*
@@ -19,8 +36,15 @@ import ui.theme.*
 fun RightSide(
     state: MainUIState,
     onWeatherDayItemClicked: (DaysInterval) -> Unit,
+    search: (searchText: String) -> Unit,
+    onSearchIconClick: () -> Unit,
 ) {
 
+    var searchText by rememberSaveable { mutableStateOf("") }
+    LaunchedEffect(searchText) {
+        delay(1000)
+        search(searchText)
+    }
     Box(Modifier.fillMaxHeight().background(color = Cards)) {
 
         Column(
@@ -28,9 +52,30 @@ fun RightSide(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)) {
-                LocationCard(country = "Iraq", state = "Baghdad")
+                if (state.isSearching) {
+                    TextField(
+                        value = searchText,
+                        onValueChange = { newString ->
+                            searchText = newString
+                        },
+                        textStyle = typography.h5,
+                        colors = TextFieldDefaults.textFieldColors(
+                            focusedIndicatorColor = Color.Transparent,
+                            cursorColor = Color.White,
+                            unfocusedIndicatorColor = Color.Transparent
+                        ),
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = { search(searchText) }
+                        ),
+                    )
+                } else {
+                    LocationCard(country = state.location, onSearchIconClick)
+                    searchText = ""
+                }
             }
-
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("${state.todayTemp}°", style = typography.h1, color = TextPrimary)
                 Text(
@@ -74,7 +119,10 @@ fun RightSide(
                 }
             }
 
-            Spacer(Modifier.padding(horizontal = Space32).fillMaxWidth().height(Space1).background(Divider))
+            Spacer(
+                Modifier.padding(horizontal = Space32).fillMaxWidth().height(Space1)
+                    .background(Divider)
+            )
             Column(
                 Modifier.fillMaxHeight()
                     .padding(top = Space40),
