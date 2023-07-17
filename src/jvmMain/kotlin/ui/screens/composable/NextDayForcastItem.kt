@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ui.screens.DaysInterval
 import ui.theme.Divider
-import ui.theme.IconCloudRaining
 import ui.theme.IconsSurface
 import ui.theme.Radius8
 import ui.theme.Space16
@@ -55,7 +54,7 @@ fun NextDayForCastItem(
             ) {
                 Icon(
                     modifier = Modifier.padding(Space8).size(40.dp),
-                    painter = painterResource(IconCloudRaining),
+                    painter = painterResource(daysInterval.icons),
                     contentDescription = null,
                     tint = Color.White
 
