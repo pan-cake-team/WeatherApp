@@ -5,6 +5,7 @@ import data.remote.dto.Hour
 import domain.model.DaysForCast
 import domain.model.HourlyWeather
 import util.getIconForWeatherCode
+import util.setBackground
 
 fun Forecastday.toDaysForcast(): DaysForCast {
     return DaysForCast(
@@ -17,7 +18,8 @@ fun Forecastday.toDaysForcast(): DaysForCast {
         dayWindSpeed = day?.maxwindKph,
         willItRain = day?.dailyWillItRain,
         willItSnow = day?.dailyWillItSnow,
-        icon = getIconForWeatherCode(day?.condition?.code!!)
+        icon = getIconForWeatherCode(day?.condition?.code!!),
+        backGround = setBackground(day.condition.code)
     )
 }
 
