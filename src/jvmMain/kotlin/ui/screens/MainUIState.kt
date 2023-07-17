@@ -1,5 +1,6 @@
 package ui.screens
 
+import ui.theme.ImageClearSky
 import ui.theme.ImageFoggy
 
 data class MainUIState(
@@ -10,7 +11,7 @@ data class MainUIState(
     val todayMinTemp: Int = 0,
     val windSpeed: Double = 0.0,
     val precipitation: Int = 0,
-    val backGround: String = ImageFoggy,
+    val backGround: String = ImageClearSky,
     val date: String = "",
     val weatherType: String = "",
     val isSearching:Boolean = false,

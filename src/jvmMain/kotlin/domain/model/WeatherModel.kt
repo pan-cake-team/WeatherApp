@@ -2,7 +2,7 @@ package domain.model
 
 data class WeatherModel(
     val location: String?,
-    val data: List<DaysForCast>?,
+    val data: List<DaysForCast>? = listOf(),
 )
 
 data class DaysForCast(
