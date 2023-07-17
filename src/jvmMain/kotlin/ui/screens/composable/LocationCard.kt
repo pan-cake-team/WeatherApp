@@ -2,8 +2,10 @@ package ui.screens.composable
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +30,7 @@ import ui.theme.TextSecondary
 import ui.theme.typography
 
 @Composable
-fun LocationCard(country: String, state: String) {
+fun LocationCard(country: String?,onClickSearch:()->Unit) {
     Row(
         Modifier
             .clip(RoundedCornerShape(Radius8))
@@ -37,14 +39,15 @@ fun LocationCard(country: String, state: String) {
             )
             .fillMaxWidth()
             .height(Space48)
+            .clickable { onClickSearch()}
     ) {
         Row(Modifier.padding(horizontal = Space16, vertical = Space12).fillMaxWidth()) {
             Icon(painter = painterResource(IconMapPointer), null, tint = TextPrimary)
             Text(
-                text = "$country,$state",
+                text = country.toString(),
                 style = typography.h6,
                 color = TextPrimary,
-                modifier = Modifier.padding(start = Space8)
+                modifier = Modifier.padding(start = Space8),
             )
             Spacer(Modifier.weight(1f))
             HorizontalDivider()
@@ -53,7 +56,7 @@ fun LocationCard(country: String, state: String) {
                 painter = painterResource(IconMap),
                 null,
                 tint = TextSecondary,
-                modifier = Modifier.padding(start = Space8)
+                modifier = Modifier.fillMaxHeight().padding(start = Space8).clickable { onClickSearch() }
             )
         }
 
@@ -65,6 +68,6 @@ fun LocationCard(country: String, state: String) {
 @Preview
 @Composable
 private fun Preview() {
-    LocationCard("Iraq", "Baghdad")
+    LocationCard("Iraq",{})
 
 }
