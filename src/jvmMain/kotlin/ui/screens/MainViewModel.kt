@@ -63,13 +63,16 @@ class MainViewModel : KoinComponent, BaseViewModel<MainUIState>(MainUIState()) {
             it.copy(
                 isLoading = false,
                 todayTemp = weather.data?.get(0)?.maxTemp!!.toInt(),
-                todayMinTemp = weather.data[0]?.minTemp!!.toInt(),
-                windSpeed = weather.data[0]?.dayWindSpeed!!,
+                todayMinTemp = weather.data[0].minTemp!!.toInt(),
+                windSpeed = weather.data[0].dayWindSpeed!!,
                 precipitation = weather.data[0].precipitation!!.toInt(),
                 backGround = weather.data[0].backGround,
                 location = weather.location,
                 isSearching = false,
-                days = weather.data.map { daysForCast -> daysForCast.toDaysInterval() }
+                weatherType = weather.data[0].weatherType!!,
+                date = weather.data[0].date!!,
+                days = weather.data.map { daysForCast -> daysForCast.toDaysInterval() },
+                hours = weather.data[0].days!!.map { hourlyWeather -> hourlyWeather.toHourIntervals() },
             )
         }
     }
