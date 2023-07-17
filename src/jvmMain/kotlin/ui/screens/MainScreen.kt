@@ -23,7 +23,9 @@ fun MainScreen(
 
     MainContent(
         state = state,
-        onWeatherDayItemClicked = viewModel::onWeatherDayItemClicked
+        onWeatherDayItemClicked = viewModel::onWeatherDayItemClicked,
+        onSearch =viewModel::searchCityWeather,
+        onClickSearch = viewModel::onClickSearch,
     )
 }
 
@@ -31,7 +33,10 @@ fun MainScreen(
 fun MainContent(
     state: MainUIState,
     onWeatherDayItemClicked: (DaysInterval) -> Unit,
-) {
+    onSearch: (city: String) -> Unit,
+    onClickSearch: () -> Unit,
+
+    ) {
     Box(
         contentAlignment = Alignment.BottomEnd,
     ) {
@@ -39,7 +44,7 @@ fun MainContent(
         Image(
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds,
-            painter = painterResource("images/foggy.png"),
+            painter = painterResource(state.backGround),
             contentDescription = "",
         )
 
@@ -51,7 +56,12 @@ fun MainContent(
 
             LeftSide(state)
 
-            RightSide(state = state, onWeatherDayItemClicked = onWeatherDayItemClicked)
+            RightSide(
+                state = state,
+                onWeatherDayItemClicked = onWeatherDayItemClicked,
+                onSearch,
+                onSearchIconClick = onClickSearch
+            )
 
         }
     }
