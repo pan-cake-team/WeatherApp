@@ -57,6 +57,16 @@ class MainViewModel : KoinComponent ,BaseViewModel<MainUIState>(MainUIState())  
         }
     }
 
+    fun onWeatherDayItemClicked(day: DaysInterval) {
+        updateState {
+            it.copy(
+                date = day.date,
+                weatherType = day.weatherType,
+                hours = day.hours
+            )
+        }
+
+    }
 }
 
 
@@ -65,6 +75,7 @@ fun HourlyWeather.toHourIntervals(): DayHourIntervals {
         hour = localtime!!,
         weatherType = weatherType!!,
         temp = temp_c?.toInt()!!,
+        icons = icon!!
     )
 }
 
@@ -74,5 +85,7 @@ fun DaysForCast.toDaysInterval(): DaysInterval {
         weatherType = weatherType!!,
         maxTemp = maxTemp!!,
         minTemp = minTemp!!,
+        icons = icon!!,
+        hours = days!!.map { it.toHourIntervals() },
     )
 }

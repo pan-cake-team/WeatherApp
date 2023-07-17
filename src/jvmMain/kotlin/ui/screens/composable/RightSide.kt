@@ -11,12 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import ui.screens.DaysInterval
 import ui.screens.MainUIState
 import ui.theme.*
 
 @Composable
 fun RightSide(
     state: MainUIState,
+    onWeatherDayItemClicked: (DaysInterval) -> Unit,
 ) {
 
     Box(Modifier.fillMaxHeight().background(color = Cards)) {
@@ -25,7 +27,7 @@ fun RightSide(
             modifier = Modifier.width(Space360),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)){
+            Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)) {
                 LocationCard(country = "Iraq", state = "Baghdad")
             }
 
@@ -75,7 +77,7 @@ fun RightSide(
             Spacer(Modifier.padding(horizontal = Space32).fillMaxWidth().height(Space1).background(Divider))
             Column(
                 Modifier.fillMaxHeight()
-                    .padding( top = Space40),
+                    .padding(top = Space40),
                 verticalArrangement = Arrangement.spacedBy(space = Space24),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -85,8 +87,11 @@ fun RightSide(
                     verticalArrangement = Arrangement.spacedBy(Space16),
                     modifier = Modifier
                 ) {
-                    items( state.days) {
-                        NextDayForCastItem(it)
+                    items(state.days) { daysData ->
+                        NextDayForCastItem(
+                            daysInterval = daysData,
+                            onWeatherDayItemClicked = onWeatherDayItemClicked,
+                        )
                     }
                 }
             }
