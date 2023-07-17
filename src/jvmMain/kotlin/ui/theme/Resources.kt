@@ -1,6 +1,5 @@
 package ui.theme
 
-
 private const val ImagesPath = "images/"
 const val ImageFoggy = "${ImagesPath}foggy.png"
 const val ImageMostlySunny = "${ImagesPath}mostly_sunny.png"
@@ -18,3 +17,15 @@ const val IconSun = "${IconsPath}sun.svg"
 const val IconWaterDrops = "${IconsPath}waterdrops.svg"
 const val IconWind = "${IconsPath}wind.svg"
 const val IconCloudRaining = "${IconsPath}cloud rain.svg"
+
+const val Cloud = "${IconsPath}Cloud.svg"
+const val CloudBoltMinimalistic = "${IconsPath}Cloud Bolt Minimalistic.svg"
+const val CloudSnowfallMinimalistic = "${IconsPath}Cloud Snowfall Minimalistic.svg"
+const val CloudStorm = "${IconsPath}Cloud Storm.svg"
+const val CloudSun = "${IconsPath}Cloud Sun.svg"
+const val CloudWaterdrop = "${IconsPath}Cloud Waterdrop.svg"
+const val Clouds = "${IconsPath}Clouds.svg"
+const val Fog = "${IconsPath}Fog.svg"
+const val Snowflake = "${IconsPath}Snowflake.svg"
+const val Sunny = "${IconsPath}Sunny.svg"
+const val Waterdrops = "${IconsPath}waterdrops.svg"
