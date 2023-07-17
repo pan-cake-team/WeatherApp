@@ -1,11 +1,9 @@
 package domain
 
-import data.remote.dto.Forecastday
-import data.remote.dto.Hour
+
 import data.remote.dto.WeatherForecastDto
 import data.repository.WeatherRepository
-import domain.model.DaysForCast
-import domain.model.HourlyWeather
+import domain.mapper.toDaysForcast
 import domain.model.WeatherModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -32,26 +30,5 @@ fun WeatherForecastDto.toWeatherModel(): WeatherModel {
     )
 }
 
-fun Forecastday.toDaysForcast(): DaysForCast {
-    return DaysForCast(
-        weatherType = day?.condition?.text,
-        date = date,
-        maxTemp = day?.maxtempC,
-        minTemp = day?.mintempC,
-        days = this.hour?.map { it.toHourlyWeather() },
-        precipitation = day?.totalprecipMm,
-        dayWindSpeed = day?.maxwindKph,
-        willItRain = day?.dailyWillItRain,
-        willItSnow = day?.dailyWillItSnow,
-    )
-}
 
-fun Hour.toHourlyWeather(): HourlyWeather {
-    return HourlyWeather(
-        localtime = time?.drop(11),
-        weatherType = condition?.text,
-        temp_c = tempC,
-        hourlyWillItRain = willItRain,
-        hourlyWillItSnow = willItSnow,
-    )
-}
+
