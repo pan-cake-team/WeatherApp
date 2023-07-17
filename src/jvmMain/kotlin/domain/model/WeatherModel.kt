@@ -16,6 +16,7 @@ data class DaysForCast(
     val dayWindSpeed: Double?,
     val willItSnow: Int?,
     val willItRain: Int?,
+    val backGround:String,
     val days: List<HourlyWeather>?
 )
 
