@@ -1,7 +1,5 @@
 package ui.screens
 
-
-
 data class MainUIState(
     val isLoading: Boolean = true,
     val isError: Boolean = false,
@@ -17,14 +15,17 @@ data class MainUIState(
 )
 
 data class DayHourIntervals(
-    val hour: String = "1212",
-    val weatherType: String = "asdffsaf",
+    val hour: String = "",
+    val weatherType: String = "",
+    val icons: String = "",
     val temp: Int = 0,
 )
 
 data class DaysInterval(
     val date: String = "",
+    val icons: String = "",
     val weatherType: String = "",
     val maxTemp: Double = 0.0,
     val minTemp: Double = 0.0,
+    val hours: List<DayHourIntervals> = emptyList(),
 )

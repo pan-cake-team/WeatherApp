@@ -16,7 +16,9 @@ import ui.theme.Icons
 import ui.theme.IconsSurface
 
 @Composable
-fun IconSquare() {
+fun IconSquare(
+    icons: String,
+) {
 
     Box(
         modifier = Modifier
@@ -30,7 +32,7 @@ fun IconSquare() {
 
                 .size(40.dp)
                 .align(Alignment.Center),
-            painter = painterResource("icons/cloud rain.svg"),
+            painter = painterResource(icons),
             contentDescription = "Cloud Rain Icon",
             tint = Icons,
         )
@@ -41,5 +43,5 @@ fun IconSquare() {
 @Composable
 @Preview
 fun PreviewIconSquare() {
-    IconSquare()
+
 }

@@ -19,14 +19,18 @@ fun MainScreen(
     viewModel: MainViewModel,
 ) {
 
-    val State by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
-    MainContent(State)
+    MainContent(
+        state = state,
+        onWeatherDayItemClicked = viewModel::onWeatherDayItemClicked
+    )
 }
 
 @Composable
 fun MainContent(
     state: MainUIState,
+    onWeatherDayItemClicked: (DaysInterval) -> Unit,
 ) {
     Box(
         contentAlignment = Alignment.BottomEnd,
@@ -47,7 +51,7 @@ fun MainContent(
 
             LeftSide(state)
 
-            RightSide(state)
+            RightSide(state = state, onWeatherDayItemClicked = onWeatherDayItemClicked)
 
         }
     }

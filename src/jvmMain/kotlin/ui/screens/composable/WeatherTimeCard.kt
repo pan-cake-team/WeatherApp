@@ -16,6 +16,7 @@ import ui.theme.*
 @Composable
 fun WeatherTimeCard(
     modifier: Modifier = Modifier,
+    icons: String,
     time: String,
     number: Int,
 ) {
@@ -39,7 +40,7 @@ fun WeatherTimeCard(
             SpacerVertical(8)
             HorizontalLine()
             SpacerVertical(8)
-            IconSquare()
+            IconSquare(icons = icons)
             SpacerVertical(8)
             Text(
                 text = "$number °c",
@@ -53,5 +54,4 @@ fun WeatherTimeCard(
 @Preview
 @Composable
 fun PreviewWeatherTimeCard() {
-    WeatherTimeCard(modifier = Modifier, "11:00", 11)
 }
