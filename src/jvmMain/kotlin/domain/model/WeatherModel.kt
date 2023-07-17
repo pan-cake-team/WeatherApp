@@ -1,7 +1,5 @@
 package domain.model
 
-import ui.screens.DaysInterval
-
 data class WeatherModel(
     val location: String?,
     val data: List<DaysForCast>?,
@@ -12,6 +10,7 @@ data class DaysForCast(
     val maxTemp: Double?,
     val minTemp: Double?,
     val date: String?,
+    val icon: String?,
     val precipitation: Double?,
     val dayWindSpeed: Double?,
     val willItSnow: Int?,
@@ -22,16 +21,8 @@ data class DaysForCast(
 data class HourlyWeather(
     val localtime: String?,
     val temp_c: Double?,
+    val icon: String?,
     val hourlyWillItSnow: Int?,
     val hourlyWillItRain: Int?,
     val weatherType: String?,
 )
-
-//data class HourlyWeather(
-//    val time: String,
-//    val temperature: Double,
-//    val weatherType: String,
-//    val weatherIconUrl: String
-//)
-
-
