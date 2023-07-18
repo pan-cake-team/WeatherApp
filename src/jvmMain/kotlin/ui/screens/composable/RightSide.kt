@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import kotlinx.coroutines.delay
 import org.koin.core.component.getScopeId
@@ -65,8 +66,10 @@ fun RightSide(
                             unfocusedIndicatorColor = Color.Transparent
                         ),
                         keyboardOptions = KeyboardOptions(
-                            imeAction = ImeAction.Done
+                            imeAction = ImeAction.Done,
+                            keyboardType = KeyboardType.Text  // Add this line
                         ),
+                        singleLine = true,  // Add this line
                         keyboardActions = KeyboardActions(
                             onDone = { search(searchText) }
                         ),
