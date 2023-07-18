@@ -12,14 +12,14 @@ import org.koin.core.component.inject
 class GetWeatherUseCase: KoinComponent {
 
     private val weatherRepository: WeatherRepository by inject()
-    private val getCurrentLocationUseCase: GetCurrentLocationUseCase by inject()
+//    private val getCurrentLocationUseCase: GetCurrentLocationUseCase by inject()
 
     suspend operator fun invoke() = getDailyCurrentLocationWeather()
 
 
     private suspend fun getDailyCurrentLocationWeather(): WeatherModel {
-        val currentLocation = getCurrentLocationUseCase()
-        return weatherRepository.getForecasts(currentLocation.loc).toWeatherModel()
+//        val currentLocation = getCurrentLocationUseCase()
+        return weatherRepository.getForecasts("31.9552,35.9450").toWeatherModel()
     }
 }
 

@@ -58,25 +58,26 @@ class MainViewModel : KoinComponent, BaseViewModel<MainUIState>(MainUIState()) {
         }
     }
 
-    private fun updateScreen(weather:WeatherModel) {
-        updateState {
-            it.copy(
-                isLoading = false,
-                todayTemp = weather.data?.get(0)?.maxTemp!!.toInt(),
-                todayMinTemp = weather.data[0].minTemp!!.toInt(),
-                windSpeed = weather.data[0].dayWindSpeed!!,
-                precipitation = weather.data[0].precipitation!!.toInt(),
-                backGround = weather.data[0].backGround,
-                location = weather.location,
-                isSearching = false,
-                weatherType = weather.data[0].weatherType!!,
-                date = weather.data[0].date!!,
-                days = weather.data.map { daysForCast -> daysForCast.toDaysInterval() },
-                hours = weather.data[0].days!!.map { hourlyWeather -> hourlyWeather.toHourIntervals() },
-            )
+    private fun updateScreen(weather: WeatherModel) {
+        weather.data?.get(0)?.let { weatherData ->
+            updateState {
+                it.copy(
+                    isLoading = false,
+                    todayTemp = weatherData.maxTemp?.toInt() ?: 0,
+                    todayMinTemp = weatherData.minTemp?.toInt() ?: 0,
+                    windSpeed = weatherData.dayWindSpeed ?: 0.0,
+                    precipitation = weatherData.precipitation?.toInt() ?: 0,
+                    backGround = weatherData.backGround,
+                    location = weather.location,
+                    isSearching = false,
+                    weatherType = weatherData.weatherType ?: "",
+                    date = weatherData.date ?: "",
+                    days = weather.data?.map { daysForCast -> daysForCast.toDaysInterval() } ?: listOf(),
+                    hours = weatherData.days?.map { hourlyWeather -> hourlyWeather.toHourIntervals() } ?: listOf(),
+                )
+            }
         }
     }
-
 
     fun onWeatherDayItemClicked(day: DaysInterval) {
         updateState {
