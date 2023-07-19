@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ui.screens.MainUIState
 import ui.theme.TextSecondary
@@ -37,7 +38,13 @@ fun LeftSide(
             horizontalAlignment = Alignment.End,
         ) {
 
-            Text(state.weatherType, style = typography.h1, color = TextSecondary)
+            Text(
+                state.weatherType,
+                style = typography.h1,
+                color = TextSecondary,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
             HorizontalLine()
             SpacerVertical(32)
             LazyRow   (
