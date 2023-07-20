@@ -2,18 +2,17 @@ package ui.screens.composable
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -22,13 +21,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import org.koin.core.component.getScopeId
 import ui.screens.DaysInterval
 import ui.screens.MainUIState
 import ui.theme.*
@@ -46,13 +45,14 @@ fun RightSide(
         delay(1000)
         search(searchText)
     }
-    Box(Modifier.fillMaxHeight().background(color = Cards)) {
+
+    Box(Modifier.width(Space360).fillMaxHeight().background(color = Cards)) {
 
         Column(
             modifier = Modifier.width(Space360),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space40)) {
+            Box(Modifier.fillMaxWidth().padding(start = Space32, end = Space32, top = Space60)) {
                 if (state.isSearching) {
                     TextField(
                         value = searchText,
@@ -73,6 +73,13 @@ fun RightSide(
                         keyboardActions = KeyboardActions(
                             onDone = { search(searchText) }
                         ),
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(Radius8))
+                            .border(
+                                width = Space1, color = Icons, RoundedCornerShape(Radius8),
+                            )
+                            .fillMaxWidth()
+                            .height(56.dp),
                     )
                 } else {
                     LocationCard(country = state.location, onSearchIconClick)
@@ -88,39 +95,44 @@ fun RightSide(
                     modifier = Modifier
                 )
             }
-            Box {
-                Row(Modifier.padding(Space8)) {
-                    Icon(painter = painterResource(IconSun), null, tint = TextSecondary)
-                    Text(
-                        modifier = Modifier.padding(start = Space8),
-                        text = "Lower temperature, ${state.todayMinTemp}°c",
-                        style = typography.h6,
-                        color = TextPrimary
-                    )
+            Column(
+                horizontalAlignment = Alignment.Start
+            ) {
+                Box {
+                    Row(Modifier.padding(Space8)) {
+                        Icon(painter = painterResource(IconSun), null, tint = TextSecondary)
+                        Text(
+                            modifier = Modifier.padding(start = Space8),
+                            text = "Lower temperature, ${state.todayMinTemp}°c",
+                            style = typography.h6,
+                            color = TextPrimary
+                        )
+                    }
+                }
+                Box(Modifier.padding(top = Space8)) {
+                    Row(Modifier.padding(Space8)) {
+                        Icon(painter = painterResource(IconWind), null, tint = TextSecondary)
+                        Text(
+                            modifier = Modifier.padding(start = Space8),
+                            text = "Wind speed, ${state.windSpeed} km/h",
+                            style = typography.h6,
+                            color = TextPrimary
+                        )
+                    }
+                }
+                Box(Modifier.padding(top = Space8, bottom = Space40)) {
+                    Row(Modifier.padding(Space8)) {
+                        Icon(painter = painterResource(IconWaterDrops), null, tint = TextSecondary)
+                        Text(
+                            modifier = Modifier.padding(start = Space8),
+                            text = "Precipitation, ${state.precipitation}%",
+                            style = typography.h6,
+                            color = TextPrimary
+                        )
+                    }
                 }
             }
-            Box(Modifier.padding(top = Space8)) {
-                Row(Modifier.padding(Space8)) {
-                    Icon(painter = painterResource(IconWind), null, tint = TextSecondary)
-                    Text(
-                        modifier = Modifier.padding(start = Space8),
-                        text = "Wind speed, ${state.windSpeed} km/h",
-                        style = typography.h6,
-                        color = TextPrimary
-                    )
-                }
-            }
-            Box(Modifier.padding(top = Space8, bottom = Space40)) {
-                Row(Modifier.padding(Space8)) {
-                    Icon(painter = painterResource(IconWaterDrops), null, tint = TextSecondary)
-                    Text(
-                        modifier = Modifier.padding(start = Space8),
-                        text = "Precipitation, ${state.precipitation}%",
-                        style = typography.h6,
-                        color = TextPrimary
-                    )
-                }
-            }
+
 
             Spacer(
                 Modifier.padding(horizontal = Space32).fillMaxWidth().height(Space1)

@@ -24,7 +24,7 @@ fun MainScreen(
     MainContent(
         state = state,
         onWeatherDayItemClicked = viewModel::onWeatherDayItemClicked,
-        onSearch =viewModel::searchCityWeather,
+        onSearch = viewModel::searchCityWeather,
         onClickSearch = viewModel::onClickSearch,
     )
 }
@@ -48,24 +48,23 @@ fun MainContent(
             contentDescription = "",
         )
 
-
-
         Row(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
+
             LeftSide(state)
 
             RightSide(
-                state = state,
+                state,
                 onWeatherDayItemClicked = onWeatherDayItemClicked,
-                onSearch,
-                onSearchIconClick = onClickSearch
+                search = onSearch,
+                onSearchIconClick = onClickSearch,
             )
+
 
         }
     }
-
 }
 
 

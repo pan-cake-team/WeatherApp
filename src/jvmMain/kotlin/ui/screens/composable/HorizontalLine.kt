@@ -11,6 +11,7 @@ import ui.theme.Divider
 fun HorizontalLine(modifier: Modifier = Modifier) {
     Spacer(modifier = Modifier
         .height(1.dp)
+        .padding(start = 40.dp, end = 40.dp)
         .background(Divider)
         .fillMaxWidth()
     )
