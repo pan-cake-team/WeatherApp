@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import ui.theme.Divider
 
 @Composable
-fun HorizontalLine() {
+fun HorizontalLine(modifier: Modifier = Modifier) {
     Spacer(modifier = Modifier
         .height(1.dp)
         .background(Divider)
